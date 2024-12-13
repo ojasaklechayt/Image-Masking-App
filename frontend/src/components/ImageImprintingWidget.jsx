@@ -15,7 +15,7 @@ const ImageInpaintingWidget = () => {
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/images/');
+                const response = await axios.get('https://image-masking-app.onrender.com/api/images/');
                 console.log(response.data.images);
                 setUploadedImages(response.data.images || []); // Ensures response structure
             } catch (error) {
@@ -78,7 +78,7 @@ const ImageInpaintingWidget = () => {
         setIsUploading(true);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/images/upload', {
+            const response = await axios.post('https://image-masking-app.onrender.com/api/images/upload', {
                 originalImage,
                 maskedImage: maskImage,
                 originalFilename,
@@ -88,7 +88,7 @@ const ImageInpaintingWidget = () => {
             console.log('Uploaded Successfully', response.data);
             alert('Images uploaded successfully!');
             // Fetch updated images after successful upload
-            const updatedImages = await axios.get('http://localhost:5000/api/images/');
+            const updatedImages = await axios.get('https://image-masking-app.onrender.com/api/images/');
             setUploadedImages(updatedImages.data.images || []);
         } catch (error) {
             console.error('Upload failed', error);
@@ -100,9 +100,9 @@ const ImageInpaintingWidget = () => {
 
     // Handle selecting an existing image for editing
     const handleEditImage = (image) => {
-        setOriginalImage(`http://localhost:5000/${image.originalPath}`);
+        setOriginalImage(`https://image-masking-app.onrender.com/${image.originalPath}`);
         setOriginalFilename(image.filename);
-        setMaskImage(`http://localhost:5000/${image.maskedPath}`);
+        setMaskImage(`https://image-masking-app.onrender.com/${image.maskedPath}`);
     };
 
     return (
@@ -146,14 +146,14 @@ const ImageInpaintingWidget = () => {
                                     <div className="flex justify-between gap-4">
                                         <div className="w-1/2">
                                             <img
-                                                src={`http://localhost:5000/${image.originalPath}`}
+                                                src={`https://image-masking-app.onrender.com/${image.originalPath}`}
                                                 alt="Original"
                                                 className="w-full h-auto object-cover rounded-lg"
                                             />
                                         </div>
                                         <div className="w-1/2">
                                             <img
-                                                src={`http://localhost:5000/${image.maskedPath}`}
+                                                src={`https://image-masking-app.onrender.com/${image.maskedPath}`}
                                                 alt="Masked"
                                                 className="w-full h-auto object-cover rounded-lg"
                                             />
